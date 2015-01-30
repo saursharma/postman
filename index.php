@@ -66,10 +66,10 @@ use \core\router as Router, \helpers\url as Url;
 //define routes
 //Router::any('', '\controllers\home@index');
 Router::any('', '\controllers\login@logindisplay');
-/* Router::any('/applications', '\controllers\application@appdisplay');
+Router::any('/applications', '\controllers\application@appdisplay');
 Router::any('/users', '\controllers\user@userdisplay');
 Router::any('/message', '\controllers\message@msgdisplay');
-Router::any('/applications/addapp', '\controllers\application@addapplication'); */
+Router::any('/applications/addapp', '\controllers\application@addapplication');
 
 //if no route found
 Router::error('\core\error@index');
