@@ -3,7 +3,7 @@ namespace controllers;
 use core\view;
 use \PDO;
 
-class User extends \core\controller{
+class Users extends \core\controller{
 
 	public function __construct(){
 		parent::__construct();
@@ -13,25 +13,21 @@ class User extends \core\controller{
 	/**
 	 * Define Index page title and load template files
 	 */
-	public function userdisplay() 
+	public function index() 
 	{
 	    $data = $this->_db->select('SELECT app_name, count(user_id) as total_users FROM 
 	    applications t1, user t2 where t1.package_name=t2.package_name', array(), PDO::FETCH_ASSOC);
 	  
 		View::rendertemplate('header', $data);
-		View::render('userdisplay', $data);
+		View::render('users/userdisplay', $data);
 		View::rendertemplate('footer', $data);
 	}
 
-	/**
-	 * Define Subpage page title and load template files
-	 */
-	public function subpage() {
-		$data['title'] = $this->language->get('subpage_text');
-		$data['welcome_message'] = $this->language->get('subpage_message');
-		
+	public function login() 
+	{
+	  
 		View::rendertemplate('header', $data);
-		View::render('home', $data);
+		View::render('users/logindisplay', $data);
 		View::rendertemplate('footer', $data);
 	}
 

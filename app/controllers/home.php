@@ -26,7 +26,7 @@ class Home extends \core\controller{
 	    $data['msg_count']= $msg_count[0]['msg_count'];
 			  
 		View::rendertemplate('header', $data);
-		View::render('home', $data);
+		View::render('home/home', $data);
 		View::rendertemplate('footer', $data);
 	}
 	

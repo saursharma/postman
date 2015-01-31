@@ -61,15 +61,28 @@ if (defined('ENVIRONMENT')){
 new \core\config();
 
 //create alias for Router
-use \core\router as Router, \helpers\url as Url;
+use \core\router,
+    \helpers\url;
 
 //define routes
 //Router::any('', '\controllers\home@index');
-Router::any('', '\controllers\login@logindisplay');
-Router::any('/applications', '\controllers\application@appdisplay');
-Router::any('/users', '\controllers\user@userdisplay');
-Router::any('/message', '\controllers\message@msgdisplay');
-Router::any('/applications/addapp', '\controllers\application@addapplication');
+
+
+//define routes home
+Router::any('', '\controllers\home@index');
+
+//define routes users 
+Router::any('users', '\controllers\users@index');
+Router::any('users/loginpage', '\controllers\users@login');
+Router::any('users/userdisplay', '\controllers\users@profil');
+
+//define routes applications 
+Router::any('applications', '\controllers\applications@index');
+Router::any('applications', '\controllers\applications@addapp');
+
+//define routes messages
+Router::any('messages', '\controllers\messages@index');
+Router::any('messages', '\controllers\addmessage@add');
 
 //if no route found
 Router::error('\core\error@index');

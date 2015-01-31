@@ -3,7 +3,7 @@ namespace controllers;
 use core\view;
 use \PDO;
 
-class Application extends \core\controller{
+class Applications extends \core\controller{
 
 	public function __construct(){
 		parent::__construct();
@@ -13,15 +13,12 @@ class Application extends \core\controller{
 	/**
 	 * Define Index page title and load template files
 	 */
-	public function appdisplay() {
-		#$data['title'] = $this->language->get('welcome_text');
-		#$data['welcome_message'] = $this->language->get('welcome_message');
-		
-	    $data = $this->_db->select('SELECT * FROM applications', array(), PDO::FETCH_ASSOC);
-	    
-	  
+	public function index() {
+
+	    $data = $this->_db->select('SELECT * FROM applications', array(), PDO::FETCH_ASSOC);		
+
 		View::rendertemplate('header', $data);
-		View::render('applications', $data);
+		View::render('applications/applications', $data);
 		View::rendertemplate('footer', $data);
 	}
 	
@@ -31,23 +28,16 @@ class Application extends \core\controller{
 		View::render('success', $data);
 		View::rendertemplate('footer', $data);
 	}
-/**
-	public function applications()
-	{
-	    View::rendertemplate('header',$data);
-		View::render('applications',$data);
-		View::rendertemplate('footer',$data);
-	}
-*/
+
 	/**
 	 * Define Subpage page title and load template files
 	 */
-	public function subpage() {
+	public function addapp() {
 		$data['title'] = $this->language->get('subpage_text');
 		$data['welcome_message'] = $this->language->get('subpage_message');
 		
 		View::rendertemplate('header', $data);
-		View::render('home', $data);
+		View::render('applications/addapplications', $data);
 		View::rendertemplate('footer', $data);
 	}
 
