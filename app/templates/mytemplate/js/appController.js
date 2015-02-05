@@ -4,6 +4,29 @@ adminPanel.controller('loginCtrl', function($scope) {
   $scope.logo = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/v/t1.0-1/p160x160/1966841_10205564593336771_1131066954403916535_n.jpg?oh=e110c4b435cec1f8d2d99b8fad29f516&oe=55336522&__gda__=1428491118_1bfc83d6ec955ffa3107d05ea7629090";
 });
 
+function addAppDialogCtrl($scope, $mdDialog) {
+  $scope.app;
+
+  $scope.addApp = function() {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        window.console.log('success');
+      }
+    }
+    xmlhttp.open("POST","applications/addnew",true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("data="+$scope.app);
+  };
+};
+
 adminPanel.controller('adminCtrl', function($scope, $mdSidenav, $mdDialog) {
   $scope.title = 'Admin Panel';
 
@@ -16,15 +39,23 @@ adminPanel.controller('adminCtrl', function($scope, $mdSidenav, $mdDialog) {
 
   // Show dialog (For Add new aplication)
   $scope.showDialog = function(ev) {
-    window.console.log('in func');
     $mdDialog.show({
-     // controller: DialogController,
+      controller: addAppDialogCtrl,
       //templateUrl: 'dialog.tmpl.html',
-      template: '<md-dialog> <md-content> <table> <thead> <tr><th><center> Add New Application </center></th> </tr>  </thead> <tbody><tr><td> Application name</td><td> <input type="text" id="app_name" name="app_name" value=""> </td></tr><tr><td> Package name</td><td> <input type="text" id="package_name" name="package_name" value=""> </td> </tr> <tr><td> Public Key </td><td> <input type="text" id="public_key" name="public_key" value=""> </td> </tr></tbody> </table><md-button ng-href="/applications/appdisplay"> Save </md-button> </md-content></md-dialog>', 
+      template: '<md-dialog aria-label="Add new application" style="width: 60%">' +
+          '<md-content><md-subheader class="md-sticky-no-effect">Add new application</md-subheader>' +
+          '<p>Add application details</p>' +
+          '<md-text-float label="App name" ng-model="app.name" class="long"> </md-text-float>' +
+          '<md-text-float label="Package name" ng-model="app.package" class="long"> </md-text-float>' +
+          '<md-text-float label="Public key" ng-model="app.key" class="long"> </md-text-float>' +
+          '</md-content><div class="md-actions" layout="row"><span flex></span>' +
+          '<md-button ng-click="addApp()" class="md-raised md-primary">Add</md-button>' +
+          '<md-button ng-click="#" class="md-raised md-warn">Cancel</md-button>' +
+          '</div></md-dialog>', 
       targetEvent: ev
     });
   };
-  
+
     // Show dialog (For add new messages)
   $scope.showDialog1 = function(ev) {
     window.console.log('in func');

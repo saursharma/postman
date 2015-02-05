@@ -28,8 +28,10 @@ class Applications extends \core\controller{
 		View::rendertemplate('footer', $data);
 	}
 	
-	public function addapplication()
-	{
+	public function addapplication($data)
+  {
+    print_r($data);
+    return $data;
         //View::rendertemplate('header', $data);
 		View::render('success', $data);
 		//View::rendertemplate('footer', $data);
@@ -38,12 +40,13 @@ class Applications extends \core\controller{
 	/**
 	 * Define Subpage page title and load template files
 	 */
-	public function addapp() {
-		$data['title'] = $this->language->get('subpage_text');
-		$data['welcome_message'] = $this->language->get('subpage_message');
+  public function addapp() {
+    print_r($_POST['data']);
+		//$data['title'] = $this->language->get('subpage_text');
+		//$data['welcome_message'] = $this->language->get('subpage_message');
 		
 		//View::rendertemplate('header', $data);
-		View::render('applications/addapplication', $data);
+		//View::render('applications/addapplication', $data);
 		//View::rendertemplate('footer', $data);
 	}
 

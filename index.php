@@ -78,7 +78,7 @@ Router::any('users/userdisplay', '\controllers\users@profil');
 
 //define routes applications 
 Router::any('applications', '\controllers\applications@index');
-Router::any('applications', '\controllers\applications@addapp');
+Router::any('applications/addnew', '\controllers\applications@addapp');
 
 //define routes messages
 Router::any('messages', '\controllers\messages@index');
