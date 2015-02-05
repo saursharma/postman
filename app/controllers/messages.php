@@ -21,5 +21,22 @@ class Messages extends \core\controller{
 		View::render('messages/msgdisplay', $data);
 		View::rendertemplate('footer', $data);
 	}
+	
+	public function addmsg() {
+		$data['title'] = $this->language->get('subpage_text');
+		$data['welcome_message'] = $this->language->get('subpage_message');
+		
+		//View::rendertemplate('header', $data);
+		View::render('messages/addmessage', $data);
+		//View::rendertemplate('footer', $data);
+	}
+	
+	public function savemsg()
+	{
+		$data='jhjhjhjh';
+		print_r($_POST['002']);
+		print_r($data);
+		//View::render('success', $data);
+	}
 
 }

@@ -5,28 +5,34 @@ use \PDO;
 
 class Applications extends \core\controller{
 
+    #private $_model;
+
 	public function __construct(){
 		parent::__construct();
 
 		$this->language->load('welcome');
+		#$this->_model= new \models\viewapp();
 	}
-	/**
-	 * Define Index page title and load template files
-	 */
+
+   // Function to display all applications...
 	public function index() {
 
 	    $data = $this->_db->select('SELECT * FROM applications', array(), PDO::FETCH_ASSOC);		
 
+		#$data= $this->_model->getApp();
+		#print_r($data);
+	#	echo "jghjg"; 
+		
 		View::rendertemplate('header', $data);
-		View::render('applications/applications', $data);
+		View::render('applications/viewapplications', $data);
 		View::rendertemplate('footer', $data);
 	}
 	
 	public function addapplication()
 	{
-        View::rendertemplate('header', $data);
+        //View::rendertemplate('header', $data);
 		View::render('success', $data);
-		View::rendertemplate('footer', $data);
+		//View::rendertemplate('footer', $data);
 	}
 
 	/**
@@ -36,9 +42,9 @@ class Applications extends \core\controller{
 		$data['title'] = $this->language->get('subpage_text');
 		$data['welcome_message'] = $this->language->get('subpage_message');
 		
-		View::rendertemplate('header', $data);
-		View::render('applications/addapplications', $data);
-		View::rendertemplate('footer', $data);
+		//View::rendertemplate('header', $data);
+		View::render('applications/addapplication', $data);
+		//View::rendertemplate('footer', $data);
 	}
 
 }
